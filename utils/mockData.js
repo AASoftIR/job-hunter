@@ -7,6 +7,9 @@ export const mockJobs = [
 		salary: "$120,000 - $160,000",
 		description:
 			"We are seeking a talented Software Engineer to join our team...",
+		jobType: "Full Time",
+		paymentMethods: ["Bank Transfer", "PayPal"],
+		requirements: ["React 3 years", "Node.js 2 years"],
 	},
 	{
 		id: "2",
@@ -15,6 +18,9 @@ export const mockJobs = [
 		location: "New York, NY",
 		salary: "$100,000 - $140,000",
 		description: "Join our fast-paced startup as a Product Manager...",
+		jobType: "Full Time",
+		paymentMethods: ["Bank Transfer", "PayPal"],
+		requirements: ["Agile Methodology 2 years", "Leadership 3 years"],
 	},
 	{
 		id: "3",
@@ -24,6 +30,9 @@ export const mockJobs = [
 		salary: "$130,000 - $180,000",
 		description:
 			"We're looking for a Data Scientist to help us unlock insights from our vast datasets...",
+		jobType: "Full Time",
+		paymentMethods: ["Bank Transfer", "PayPal"],
+		requirements: ["Python 3 years", "Machine Learning 2 years"],
 	},
 	{
 		id: "4",
@@ -32,6 +41,9 @@ export const mockJobs = [
 		location: "Los Angeles, CA",
 		salary: "$90,000 - $120,000",
 		description: "Help us create beautiful and intuitive user experiences...",
+		jobType: "Full Time",
+		paymentMethods: ["Bank Transfer", "PayPal"],
+		requirements: ["Sketch 2 years", "User Research 3 years"],
 	},
 	{
 		id: "5",
@@ -41,6 +53,9 @@ export const mockJobs = [
 		salary: "$110,000 - $150,000",
 		description:
 			"Join our DevOps team to build and maintain our cloud infrastructure...",
+		jobType: "Full Time",
+		paymentMethods: ["Bank Transfer", "PayPal"],
+		requirements: ["AWS 3 years", "CI/CD 2 years"],
 	},
 ];
 

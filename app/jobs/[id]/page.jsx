@@ -13,12 +13,15 @@ import {
 } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import { getJobDetails } from "@/utils/api";
+import { Tooltip } from "@/components/ui/tooltip"; // Import Tooltip component
+import Modal from "@/components/ui/modal"; // Import Modal component
 
 export default function JobDetails() {
 	const { id } = useParams();
 	const router = useRouter();
 	const [job, setJob] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
 
 	useEffect(() => {
 		const fetchJobDetails = async () => {
@@ -33,10 +36,12 @@ export default function JobDetails() {
 	}, [id]);
 
 	const handleApply = () => {
-		// In a real app, this would navigate to a payment page
-		alert("Redirecting to payment page...");
-		// After payment, you would typically redirect to an application form
-		router.push(`/jobs/${id}/pay`);
+		setIsModalOpen(true); // Open modal
+	};
+
+	const handleModalClose = () => {
+		setIsModalOpen(false); // Close modal
+		router.push(`/jobs/${id}/pay`); // Redirect to payment page
 	};
 
 	if (loading) {
@@ -65,6 +70,10 @@ export default function JobDetails() {
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<div>
+							<h2 className="text-xl font-semibold mb-2">Description</h2>
+							<p>{job.description}</p>
+						</div>
+						<div>
 							<h2 className="text-xl font-semibold mb-2">Location</h2>
 							<p>{job.location}</p>
 						</div>
@@ -73,17 +82,53 @@ export default function JobDetails() {
 							<p>{job.salary}</p>
 						</div>
 						<div>
-							<h2 className="text-xl font-semibold mb-2">Description</h2>
-							<p>{job.description}</p>
+							<h2 className="text-xl font-semibold mb-2">Job Type</h2>
+							<p>{job.jobType}</p>
+						</div>
+						<div>
+							<h2 className="text-xl font-semibold mb-2">Requirements</h2>
+							<div className="flex flex-wrap gap-2">
+								{job.requirements.map((requirement, index) => (
+									<span
+										key={index}
+										className="bg-zinc-500 px-3 py-2 rounded-lg hover:bg-zinc-800 duration-300 hover:cursor-pointer"
+									>
+										{requirement}
+									</span>
+								))}
+							</div>
+						</div>
+						<div>
+							<h2 className="text-xl font-semibold mb-2">Payment Methods</h2>
+							<div className="flex gap-4">
+								{job.paymentMethods.map((method, index) => (
+									<Tooltip key={index} content={method}>
+										<img
+											src={`/icons/${method
+												.toLowerCase()
+												.replace(" ", "_")}.svg`}
+											alt={method}
+											className="h-8 w-8 cursor-pointer"
+										/>
+									</Tooltip>
+								))}
+							</div>
 						</div>
 					</CardContent>
 					<CardFooter>
-						<Button size="lg" onClick={handleApply}>
+						<Button
+							className="block w-full rounded-xl transition-all duration-500 hover:bg-black/60"
+							size="lg"
+							onClick={handleApply}
+						>
 							Apply Now (Requires Payment)
 						</Button>
 					</CardFooter>
 				</Card>
 			</motion.div>
+			<Modal isOpen={isModalOpen} onClose={handleModalClose}>
+				<h2>Redirecting to payment page...</h2>
+			</Modal>
 		</div>
 	);
 }
